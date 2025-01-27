@@ -1,0 +1,19 @@
+{
+  "name": "bespoke-jet",
+  "version": "1.0.0",
+  "description": "Test project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/llizzokk/bespoke-jet.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/llizzokk/bespoke-jet/issues"
+  },
+  "homepage": "https://github.com/llizzokk/bespoke-jet#readme"
+}
