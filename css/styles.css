@@ -87,9 +87,6 @@ img {
   height: 450px;
   background-color: #fff;
   display: flex;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s ease;
 }
 
 .slide-1 {
@@ -100,21 +97,13 @@ img {
   display: none;
 }
 
-.slide.active {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 1;
-  visibility: visible;
-  z-index: 1;
-}
-
 .content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
   padding: 28px 38px;
+  transition: all 250ms ease-in-out;
 }
 
 .slide-1 .content {
@@ -130,6 +119,7 @@ img {
   font-weight: bold;
   font-size: 20px;
   width: 300px;
+  transition: transform 500ms ease-in-out;
 }
 
 .img-span {
@@ -147,14 +137,24 @@ img {
   right: 38px;
 }
 
+.dynamic-text {
+  transition: height 0.2s ease;
+}
+
 .qoute {
+  display: inline;
   font-family: "SamsungSharp";
   font-weight: medium;
   font-size: 14px;
 }
 
-.qoute a {
+.read-link {
+  font-family: "SamsungSharp";
+  font-weight: medium;
+  font-size: 14px;
+  display: inline;
   color: #8a8a88;
+  text-align: balance;
 }
 
 .img {
@@ -165,18 +165,6 @@ img {
   font-family: "SamsungSharp";
   font-weight: medium;
   text-align: center;
-  padding: 0 20px;
-}
-
-.button {
-  font-family: "SamsungOne";
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 18px;
-  background-color: transparent;
-  border: 2px solid #000;
-  padding: 13px 29px;
-  border-radius: 30px;
 }
 
 .nav {
@@ -188,6 +176,29 @@ img {
 .nav-btn {
   border: none;
   background-color: transparent;
+  padding: 4px 10px;
+  transition: transform 250ms ease-in-out;
+}
+
+.nav-btn:hover {
+  transform: scale(1.2);
+}
+
+.button {
+  font-family: "SamsungOne";
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 18px;
+  background-color: transparent;
+  border: 2px solid #000;
+  padding: 13px 29px;
+  border-radius: 30px;
+  transform: scale(0.9);
+  transition: transform 250ms ease-in-out;
+}
+
+.button:hover {
+  transform: scale(1);
 }
 
 .prev {
