@@ -30,6 +30,7 @@ const slides = [
 
 let currentIndex = 0;
 
+const button = document.querySelector(".button");
 const dynamicText = document.getElementById("dynamicText");
 const slideText = document.getElementById("slideText");
 const slideImage = document.getElementById("slideImage");
@@ -37,7 +38,11 @@ const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 const pageNumber = document.getElementById("pageNumber");
 
-function updateSlide(index) {
+button.addEventListener("click", () => {
+  window.location.href = "../pages/empty.html";
+});
+
+function updateSlide(index, scroll = "next") {
   const slide = slides[index];
 
   gsap.to(dynamicText, {
@@ -66,31 +71,89 @@ function updateSlide(index) {
 
   slideText.textContent = slide.text;
   pageNumber.textContent = slides[index].page;
+
+  if (scroll === "next") {
+    gsap.fromTo(
+      dynamicText,
+      { x: 50, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.5 }
+    );
+  } else {
+    gsap.fromTo(
+      dynamicText,
+      { x: -50, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.5 }
+    );
+  }
+
+  checkButtons();
 }
 
+// Disabled buttons
+
+function checkButtons() {
+  prevBtn.disabled = currentIndex === 0;
+  nextBtn.disabled = currentIndex === slides.length - 1;
+
+  prevBtn.classList.toggle("disabled", currentIndex === 0);
+  nextBtn.classList.toggle("disabled", currentIndex === slides.length - 1);
+}
+
+// Auto
+
+let autoPlayTimer;
+let userInteracted = false;
+
+function startAutoPlay() {
+  if (userInteracted) return;
+  autoPlayTimer = setInterval(() => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateSlide(currentIndex);
+  }, 4000);
+}
+
+function stopAutoPlay() {
+  clearInterval(autoPlayTimer);
+  userInteracted = true;
+}
+
+startAutoPlay();
+
+// Nav buttons
+
 prevBtn.addEventListener("click", () => {
+  stopAutoPlay();
   currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-  gsap.fromTo(
-    dynamicText,
-    { x: -50, opacity: 0 },
-    { x: 0, opacity: 1, duration: 0.5 }
-  );
-  updateSlide(currentIndex);
+  updateSlide(currentIndex, "prev");
 });
 
 nextBtn.addEventListener("click", () => {
+  stopAutoPlay();
   currentIndex = (currentIndex + 1) % slides.length;
-  gsap.fromTo(
-    dynamicText,
-    { x: 50, opacity: 0 },
-    { x: 0, opacity: 1, duration: 0.5 }
-  );
-  updateSlide(currentIndex);
+  updateSlide(currentIndex, "next");
 });
 
 updateSlide(currentIndex);
 
-// setInterval(() => {
-//   updateSlide(currentIndex);
-//   currentIndex = (currentIndex + 1) % 4;
-// }, 2000);
+// Buttons animation
+
+const pulseElements = document.querySelectorAll(".pulse-element");
+
+pulseElements.forEach((element) => {
+  let pulseAnimation = gsap.to(element, {
+    scale: 1.2,
+    repeat: -1,
+    yoyo: true,
+    duration: 0.8,
+    ease: "power1.inOut",
+  });
+
+  element.addEventListener("mouseenter", () => {
+    pulseAnimation.kill();
+    gsap.set(element, { scale: 1 });
+  });
+
+  element.addEventListener("mouseleave", () => {
+    gsap.set(element, { scale: 0.9 });
+  });
+});

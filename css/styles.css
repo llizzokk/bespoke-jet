@@ -177,11 +177,17 @@ img {
   border: none;
   background-color: transparent;
   padding: 4px 10px;
-  transition: transform 250ms ease-in-out;
+  transform: scale(0.9);
+  transition: all 250ms ease-in-out;
 }
 
 .nav-btn:hover {
-  transform: scale(1.2);
+  transform: scale(1);
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .button {
@@ -194,15 +200,9 @@ img {
   padding: 13px 29px;
   border-radius: 30px;
   transform: scale(0.9);
-  transition: transform 250ms ease-in-out;
+  transition: all 250ms ease-in-out;
 }
 
 .button:hover {
   transform: scale(1);
-}
-
-.prev {
-}
-
-.next {
 }
