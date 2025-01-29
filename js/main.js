@@ -3,7 +3,7 @@
 const slides = [
   {
     text: "The first time I used the Samsung Bespoke Jet™, I cried. Im not being sensational; I really did.Of course, this vacuum worked great. But thats not all.",
-    img: "./assets/images/2/Image.jpg",
+    img: "./assets/images/1/Image.jpg",
     page: "1/5",
   },
   {
@@ -30,13 +30,125 @@ const slides = [
 
 let currentIndex = 0;
 
-const button = document.querySelector(".button");
+const logo = document.querySelector(".logo");
+const lines = document.querySelectorAll(".line");
 const dynamicText = document.getElementById("dynamicText");
 const slideText = document.getElementById("slideText");
 const slideImage = document.getElementById("slideImage");
+const navBar = document.querySelector(".nav");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 const pageNumber = document.getElementById("pageNumber");
+const button = document.querySelector(".button");
+
+// init load
+
+window.addEventListener("load", function () {
+  gsap.to(logo, {
+    x: 0,
+    opacity: 1,
+    duration: 0.4,
+    onComplete: () => {
+      gsap.to(logo, { y: 0, delay: 0.8, duration: 0.3 });
+    },
+  });
+
+  gsap.to(lines, {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    duration: 0.6,
+    delay: 2,
+    stagger: 0.2,
+  });
+
+  if (window.innerWidth <= 768) {
+    gsap.to(slideImage, {
+      x: 0,
+      y: 380,
+      height: 400,
+      delay: 3,
+      duration: 0.8,
+      onComplete: () => {
+        gsap.to(slideImage, {
+          y: 0,
+          x: 0,
+          duration: 0,
+        });
+        slideImage.style.position = "relative";
+
+        gsap.to(dynamicText, {
+          height: "auto",
+          visibility: "visible",
+          duration: 0.5,
+          ease: "power2.out",
+        });
+
+        gsap.to(button, { opacity: 1, duration: 0.5 });
+
+        gsap.to(navBar, { opacity: 1, duration: 0.5 });
+
+        startAutoPlay();
+      },
+    });
+  } else if (window.innerWidth >= 768 && window.innerWidth < 1158) {
+    gsap.to(slideImage, {
+      x: 350,
+      width: 400,
+      delay: 3,
+      duration: 0.8,
+      onComplete: () => {
+        gsap.to(slideImage, {
+          x: 0,
+          duration: 0,
+        });
+        slideImage.style.position = "relative";
+
+        gsap.to(dynamicText, {
+          height: "auto",
+          visibility: "visible",
+          duration: 0.5,
+          ease: "power2.out",
+        });
+
+        gsap.to(button, { opacity: 1, duration: 0.5 });
+
+        gsap.to(navBar, { opacity: 1, duration: 0.5 });
+
+        startAutoPlay();
+      },
+    });
+  } else {
+    gsap.to(slideImage, {
+      x: 450,
+      width: 400,
+      delay: 3,
+      duration: 0.8,
+      onComplete: () => {
+        gsap.to(slideImage, {
+          x: 0,
+          duration: 0,
+        });
+        slideImage.style.position = "relative";
+
+        gsap.to(dynamicText, {
+          height: "auto",
+          visibility: "visible",
+          duration: 0.5,
+          ease: "power2.out",
+        });
+
+        gsap.to(button, { opacity: 1, duration: 0.5 });
+
+        gsap.to(navBar, { opacity: 1, duration: 0.5 });
+
+        startAutoPlay();
+      },
+    });
+  }
+});
+
+// update frame funk
 
 button.addEventListener("click", () => {
   window.location.href = "../pages/empty.html";
@@ -61,11 +173,11 @@ function updateSlide(index, scroll = "next") {
   });
 
   gsap.to(slideImage, {
-    opacity: 0.5,
+    opacity: 0.8,
     duration: 0.1,
     onComplete: () => {
       slideImage.src = slides[index].img;
-      gsap.to(slideImage, { opacity: 1, duration: 0.3 });
+      gsap.to(slideImage, { opacity: 1, duration: 0.6 });
     },
   });
 
@@ -99,7 +211,7 @@ function checkButtons() {
   nextBtn.classList.toggle("disabled", currentIndex === slides.length - 1);
 }
 
-// Auto
+// Auto mode
 
 let autoPlayTimer;
 let userInteracted = false;
@@ -109,15 +221,13 @@ function startAutoPlay() {
   autoPlayTimer = setInterval(() => {
     currentIndex = (currentIndex + 1) % slides.length;
     updateSlide(currentIndex);
-  }, 4000);
+  }, 6000);
 }
 
 function stopAutoPlay() {
   clearInterval(autoPlayTimer);
   userInteracted = true;
 }
-
-startAutoPlay();
 
 // Nav buttons
 
