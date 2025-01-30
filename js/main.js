@@ -176,7 +176,7 @@ function updateSlide(index, scroll = "next") {
     opacity: 0.3,
     duration: 0.2,
     onComplete: () => {
-      slideImage.src = slides[index].img;
+      slideImage.src = `${slides[index].img}?t=${new Date().getTime()}`;
       gsap.to(slideImage, {
         opacity: 1,
         duration: 0.3,
