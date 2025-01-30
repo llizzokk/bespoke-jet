@@ -3,27 +3,27 @@
 const slides = [
   {
     text: "The first time I used the Samsung Bespoke Jet™, I cried. Im not being sensational; I really did.Of course, this vacuum worked great. But thats not all.",
-    img: "./assets/images/1/Image.jpg",
+    img: "./assets/images/1/frame-1.jpg",
     page: "1/5",
   },
   {
     text: "If you’re an over-cleaner, like myself, you’ll nerd out on all of the functions. If you avoid this chore at all costs, you’ll appreciate how simple Samsung makes it.",
-    img: "./assets/images/3/Image.jpg",
+    img: "./assets/images/2/frame-2.jpg",
     page: "2/5",
   },
   {
     text: "Both the floor and pet hair attachments are cleverly designed to eliminate the dreaded hair wrap. (In other words, you’ll never have to tackle hair tangles with a pair of scissors again.)",
-    img: "./assets/images/4/Image.jpg",
+    img: "./assets/images/3/frame-3.jpg",
     page: "3/5",
   },
   {
     text: "When I learned the Samsung Bespoke Vac cleaned itself with amazing technology, that’s when I cried. No more scraping spider legs and hair out of the crevices with my hands. Its suction power is so strong, the canister is left perfectly clean after every use. It’s like a vacuum for your vacuum.",
-    img: "./assets/images/5/Layer 1.jpg",
+    img: "./assets/images/4/frame-4.jpg",
     page: "4/5",
   },
   {
     text: "Because it’s so nice-looking, it can live right in the kitchen. No more hauling a vacuum up and down the basement stairs on the daily",
-    img: "./assets/images/6/Image.jpg",
+    img: "./assets/images/5/frame-5.jpg",
     page: "5/5",
   },
 ];
@@ -66,7 +66,7 @@ window.addEventListener("load", function () {
     gsap.to(slideImage, {
       x: 0,
       y: 380,
-      height: 400,
+      height: 270,
       delay: 3,
       duration: 0.8,
       onComplete: () => {
@@ -173,11 +173,15 @@ function updateSlide(index, scroll = "next") {
   });
 
   gsap.to(slideImage, {
-    opacity: 0.8,
-    duration: 0.1,
+    opacity: 0.3,
+    duration: 0.2,
     onComplete: () => {
       slideImage.src = slides[index].img;
-      gsap.to(slideImage, { opacity: 1, duration: 0.6 });
+      gsap.to(slideImage, {
+        opacity: 1,
+        duration: 0.3,
+        immediateRender: false,
+      });
     },
   });
 

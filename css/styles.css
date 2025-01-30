@@ -200,6 +200,7 @@ img {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 18px;
+  color: #000;
   background-color: transparent;
   border: 2px solid #000;
   padding: 13px 29px;
@@ -277,17 +278,18 @@ img {
 @media screen and (max-width: 768px) {
   .wrap {
     width: 300px;
-    height: 780px;
+    height: 650px;
   }
 
   .slide {
     justify-content: space-between;
-    height: 780px;
+    height: 650px;
     flex-direction: column;
   }
 
   .content {
-    height: 350px;
+    box-sizing: border-box;
+    height: 380px;
     padding: 16px 20px;
   }
 
@@ -311,6 +313,10 @@ img {
     right: 20px;
   }
 
+  .dynamic-text {
+    margin-bottom: 26px;
+  }
+
   .qoute {
     font-size: 12px;
   }
@@ -324,6 +330,7 @@ img {
   }
 
   .nav {
+    width: 100%;
     margin-bottom: 8px;
   }
 
