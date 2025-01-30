@@ -43,6 +43,11 @@ const button = document.querySelector(".button");
 
 // init load
 
+slides.forEach((slide) => {
+  const img = new Image();
+  img.src = slide.img;
+});
+
 window.addEventListener("load", function () {
   gsap.to(logo, {
     x: 0,
@@ -176,7 +181,7 @@ function updateSlide(index, scroll = "next") {
     opacity: 0.3,
     duration: 0.2,
     onComplete: () => {
-      slideImage.src = `${slides[index].img}?t=${new Date().getTime()}`;
+      slideImage.src = slides[index].img;
       gsap.to(slideImage, {
         opacity: 1,
         duration: 0.3,
