@@ -191,7 +191,7 @@ img {
 }
 
 .nav-btn:hover {
-  transform: scale(1);
+  transform: scale(0.95);
 }
 
 .disabled {
@@ -200,6 +200,7 @@ img {
 }
 
 .button {
+  position: relative;
   font-family: "SamsungOne";
   text-transform: uppercase;
   font-weight: bold;
@@ -214,8 +215,12 @@ img {
   transition: transform 0.2s ease;
 }
 
+.button span {
+  transform: scale(1) !important;
+}
+
 .button:hover {
-  transform: scale(1);
+  transform: scale(0.95);
 }
 
 @media screen and (max-width: 1158px) {
