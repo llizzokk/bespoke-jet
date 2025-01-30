@@ -260,10 +260,10 @@ const pulseElements = document.querySelectorAll(".pulse-element");
 
 pulseElements.forEach((element) => {
   let pulseAnimation = gsap.to(element, {
-    scale: 1.2,
+    scale: 1,
     repeat: -1,
     yoyo: true,
-    duration: 0.8,
+    duration: 0.9,
     ease: "power1.inOut",
   });
 

@@ -206,7 +206,7 @@ img {
   padding: 13px 29px;
   border-radius: 30px;
   transform: scale(0.9);
-  transition: all 250ms ease-in-out;
+  /* transition: all 250ms ease-in-out; */
 
   opacity: 0;
 }
