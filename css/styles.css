@@ -102,7 +102,7 @@ img {
   margin-bottom: 30px;
   z-index: 3;
   transform: translateX(-100px) translateY(40px);
-  transition: all 1s ease;
+  transition: all 1s ease-in-out;
 }
 
 .headline {
@@ -138,7 +138,8 @@ img {
 .dynamic-text {
   visibility: hidden;
   height: 0;
-  transition: opacity 0.3s ease, height 0.3s ease, visibility 0.3s ease;
+  transition: opacity 250ms ease-in-out, height 250ms ease-in-out,
+    visibility 250ms ease-in-out;
 }
 
 .quote {
@@ -186,6 +187,7 @@ img {
   background-color: transparent;
   padding: 4px 10px;
   transform: scale(0.9);
+  transition: transform 0.2s ease;
 }
 
 .nav-btn:hover {
@@ -209,6 +211,7 @@ img {
   border-radius: 30px;
   transform: scale(0.9);
   opacity: 0;
+  transition: transform 0.2s ease;
 }
 
 .button:hover {

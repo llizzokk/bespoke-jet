@@ -89,8 +89,8 @@ window.addEventListener("load", function () {
         slideImage.style.position = "relative";
 
         gsap.to(dynamicText, {
-          height: "auto",
           visibility: "visible",
+          opacity: 1,
           duration: 0.5,
           ease: "power2.out",
         });
@@ -117,8 +117,8 @@ window.addEventListener("load", function () {
         slideImage.style.position = "relative";
 
         gsap.to(dynamicText, {
-          height: "auto",
           visibility: "visible",
+          opacity: 1,
           duration: 0.5,
           ease: "power2.out",
         });
@@ -145,8 +145,8 @@ window.addEventListener("load", function () {
         slideImage.style.position = "relative";
 
         gsap.to(dynamicText, {
-          height: "auto",
           visibility: "visible",
+          opacity: 1,
           duration: 0.5,
           ease: "power2.out",
         });
@@ -278,13 +278,20 @@ pulseElements.forEach((element) => {
     ease: "power1.inOut",
   });
 
-  // Stop pulse animation when mouse enters or leaves
   element.addEventListener("mouseenter", () => {
     pulseAnimation.kill();
-    gsap.set(element, { scale: 1 });
+    gsap.to(element, { scale: 1, duration: 0.5, ease: "power1.inOut" });
   });
 
   element.addEventListener("mouseleave", () => {
-    gsap.set(element, { scale: 0.9 });
+    gsap.to(element, { scale: 0.9, duration: 0.5, ease: "power1.inOut" });
+  });
+
+  element.addEventListener("mousedown", () => {
+    gsap.to(element, { scale: 0.6, duration: 0.2 });
+  });
+
+  element.addEventListener("mouseup", () => {
+    gsap.to(element, { scale: 1, duration: 0.2 });
   });
 });
