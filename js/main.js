@@ -1,5 +1,6 @@
 "use strict";
 
+// Array of slides containing text, image source, and page numbers
 const slides = [
   {
     text: `"The first time I used the Samsung Bespoke Jet™, I cried. Im not being sensational; I really did.Of course, this vacuum worked great. But thats not all."`,
@@ -28,28 +29,29 @@ const slides = [
   },
 ];
 
+// Initialize variables for the current slide and page elements
 let currentIndex = 0;
 
-const logo = document.querySelector(".logo");
-const lines = document.querySelectorAll(".line");
-const dynamicText = document.getElementById("dynamicText");
-const slideText = document.getElementById("slideText");
-const slideImageOpt = document.getElementById("slideImageOpt");
-const slideImage = document.getElementById("slideImage");
-const navBar = document.querySelector(".nav");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-const pageNumber = document.getElementById("pageNumber");
-const button = document.querySelector(".button");
+const logo = document.querySelector(".logo"); // Logo element
+const lines = document.querySelectorAll(".line"); // Lines of text elements
+const dynamicText = document.getElementById("dynamicText"); // Dynamic text container
+const slideText = document.getElementById("slideText"); // Slide text
+const slideImage = document.getElementById("slideImage"); // Image element for the slide
+const navBar = document.querySelector(".nav"); // Navigation bar
+const prevBtn = document.getElementById("prevBtn"); // "Previous" button
+const nextBtn = document.getElementById("nextBtn"); // "Next" button
+const pageNumber = document.getElementById("pageNumber"); // Page number container
+const button = document.querySelector(".button"); // Button element
 
-// init load
-
+// Preload images of slides
 slides.forEach((slide) => {
   const img = new Image();
   img.src = slide.img;
 });
 
+// Event listener for window load to trigger animations
 window.addEventListener("load", function () {
+  // GSAP animation for logo appearance
   gsap.to(logo, {
     x: 0,
     opacity: 1,
@@ -59,6 +61,7 @@ window.addEventListener("load", function () {
     },
   });
 
+  // GSAP animation for lines of text
   gsap.to(lines, {
     opacity: 1,
     x: 0,
@@ -68,7 +71,9 @@ window.addEventListener("load", function () {
     stagger: 0.2,
   });
 
+  // Animations for slide image based on screen size
   if (window.innerWidth <= 768) {
+    // Animation for mobile devices
     gsap.to(slideImage, {
       x: 0,
       y: 380,
@@ -84,6 +89,7 @@ window.addEventListener("load", function () {
         slideImage.style.position = "relative";
 
         gsap.to(dynamicText, {
+          height: "auto",
           visibility: "visible",
           duration: 0.5,
           ease: "power2.out",
@@ -97,6 +103,7 @@ window.addEventListener("load", function () {
       },
     });
   } else if (window.innerWidth >= 768 && window.innerWidth < 1158) {
+    // Animation for tablet/medium screens
     gsap.to(slideImage, {
       x: 350,
       width: 400,
@@ -110,6 +117,7 @@ window.addEventListener("load", function () {
         slideImage.style.position = "relative";
 
         gsap.to(dynamicText, {
+          height: "auto",
           visibility: "visible",
           duration: 0.5,
           ease: "power2.out",
@@ -123,6 +131,7 @@ window.addEventListener("load", function () {
       },
     });
   } else {
+    // Animation for large screens
     gsap.to(slideImage, {
       x: 450,
       width: 400,
@@ -152,11 +161,11 @@ window.addEventListener("load", function () {
   }
 });
 
-// update frame funk
-
+// Function to update the current slide with animations
 function updateSlide(index, scroll = "next") {
   const slide = slides[index];
 
+  // Update dynamic text height with animation
   gsap.to(dynamicText, {
     duration: 0.2,
     onComplete: () => {
@@ -172,6 +181,7 @@ function updateSlide(index, scroll = "next") {
     },
   });
 
+  // Update slide image with fade-in effect
   gsap.to(slideImage, {
     opacity: 0.3,
     duration: 0.2,
@@ -185,9 +195,11 @@ function updateSlide(index, scroll = "next") {
     },
   });
 
+  // Update the slide text and page number
   slideText.textContent = slide.text;
   pageNumber.textContent = slides[index].page;
 
+  // Slide text animation for direction (next or prev)
   if (scroll === "next") {
     gsap.fromTo(
       dynamicText,
@@ -202,11 +214,11 @@ function updateSlide(index, scroll = "next") {
     );
   }
 
+  // Check button states (enable/disable)
   checkButtons();
 }
 
-// Disabled buttons
-
+// Function to check if the buttons should be enabled or disabled
 function checkButtons() {
   prevBtn.disabled = currentIndex === 0;
   nextBtn.disabled = currentIndex === slides.length - 1;
@@ -215,11 +227,11 @@ function checkButtons() {
   nextBtn.classList.toggle("disabled", currentIndex === slides.length - 1);
 }
 
-// Auto mode
-
+// Auto-play functionality
 let autoPlayTimer;
 let userInteracted = false;
 
+// Start auto-play of slides
 function startAutoPlay() {
   if (userInteracted) return;
   autoPlayTimer = setInterval(() => {
@@ -228,17 +240,13 @@ function startAutoPlay() {
   }, 6000);
 }
 
+// Stop auto-play when the user interacts with the controls
 function stopAutoPlay() {
   clearInterval(autoPlayTimer);
   userInteracted = true;
 }
 
-// Nav buttons
-
-button.addEventListener("click", () => {
-  window.location.href = "about:blank";
-});
-
+// Event listeners for navigation buttons
 prevBtn.addEventListener("click", () => {
   stopAutoPlay();
   currentIndex = (currentIndex - 1 + slides.length) % slides.length;
@@ -251,10 +259,14 @@ nextBtn.addEventListener("click", () => {
   updateSlide(currentIndex, "next");
 });
 
+button.addEventListener("click", () => {
+  window.location.href = "about:blank";
+});
+
+// Initial slide update
 updateSlide(currentIndex);
 
-// Buttons animation
-
+// Buttons pulse animation
 const pulseElements = document.querySelectorAll(".pulse-element");
 
 pulseElements.forEach((element) => {
@@ -266,6 +278,7 @@ pulseElements.forEach((element) => {
     ease: "power1.inOut",
   });
 
+  // Stop pulse animation when mouse enters or leaves
   element.addEventListener("mouseenter", () => {
     pulseAnimation.kill();
     gsap.set(element, { scale: 1 });
