@@ -3,8 +3,9 @@
 @font-face {
   font-family: "SamsungSharp";
   src: url("../assets/fonts/samsungsharpsans-medium.otf") format("opentype");
-  font-weight: medium;
+  font-weight: 500;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -12,6 +13,7 @@
   src: url("../assets/fonts/samsungsharpsans-bold.otf") format("opentype");
   font-weight: bold;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -19,6 +21,7 @@
   src: url("../assets/fonts/SamsungOne-400.woff") format("opentype");
   font-weight: bold;
   font-style: normal;
+  font-display: swap;
 }
 
 /* reset */
@@ -54,6 +57,9 @@ img {
 /* common */
 
 .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   max-width: 100%;
   min-width: 320px;
   height: 100vh;
@@ -62,28 +68,25 @@ img {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* main */
 
 .wrap {
+  display: flex;
   position: relative;
+  overflow: hidden;
   max-width: 850px;
   height: 480px;
-  overflow: hidden;
-  display: flex;
   border: 2px solid #000;
 }
 
 .slide {
+  display: flex;
   position: relative;
   min-width: 100%;
   height: 480px;
   background-color: #fff;
-  display: flex;
 }
 
 .content {
@@ -92,29 +95,28 @@ img {
   align-items: flex-start;
   justify-content: space-between;
   padding: 28px 38px;
-  transition: all 250ms ease-in-out;
 }
 
 .logo {
+  opacity: 0;
   margin-bottom: 30px;
   z-index: 3;
-  opacity: 0;
-  transition: all 1s ease;
   transform: translateX(-100px) translateY(40px);
+  transition: all 1s ease;
 }
 
 .headline {
+  z-index: 3;
+  width: 300px;
   font-family: "SamsungSharp";
   font-weight: bold;
   font-size: 20px;
-  width: 300px;
-  z-index: 3;
 }
 
 .line {
+  display: block;
   opacity: 0;
   transform: translateX(-100px);
-  display: block;
 }
 
 .img-span {
@@ -124,13 +126,13 @@ img {
 
 .title {
   position: absolute;
+  top: 28px;
+  right: 38px;
+  z-index: 3;
   font-family: "SamsungSharp";
   font-weight: bold;
   font-size: 20px;
   color: #fff;
-  top: 28px;
-  right: 38px;
-  z-index: 3;
 }
 
 .dynamic-text {
@@ -139,17 +141,17 @@ img {
   transition: opacity 0.3s ease, height 0.3s ease, visibility 0.3s ease;
 }
 
-.qoute {
+.quote {
   display: inline;
   font-family: "SamsungSharp";
-  font-weight: medium;
+  font-weight: 500;
   font-size: 14px;
-  text-align: balance;
+  text-align: justify;
 }
 
 .read-link {
   font-family: "SamsungSharp";
-  font-weight: medium;
+  font-weight: 500;
   font-size: 14px;
   display: inline;
   color: #8a8a88;
@@ -168,7 +170,7 @@ img {
 
 .page {
   font-family: "SamsungSharp";
-  font-weight: medium;
+  font-weight: 500;
   text-align: center;
 }
 
@@ -206,8 +208,6 @@ img {
   padding: 13px 29px;
   border-radius: 30px;
   transform: scale(0.9);
-  /* transition: all 250ms ease-in-out; */
-
   opacity: 0;
 }
 
